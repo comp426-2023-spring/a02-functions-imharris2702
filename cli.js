@@ -2,7 +2,7 @@
 
 import minimist from 'minimist';
 import fetch from 'node-fetch';
-import timezone from 'moment-timezone';
+import moment from 'moment-timezone';
 
 const args = minimist(process.argv.slice(2));
 //console.log(args);
@@ -17,3 +17,6 @@ if (args.h) {
 	console.log("	-j		Echo pretty JSON from open-meteo API and exit.");
 	process.exit(0);
 }
+
+const timezone = moment.tz.guess();
+//console.log(timezone);
