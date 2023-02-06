@@ -5,7 +5,6 @@ import fetch from 'node-fetch';
 import moment from 'moment-timezone';
 
 const args = minimist(process.argv.slice(2));
-//console.log(args);
 
 if (args.h) {
 	console.log("Usage: galosh.js [options] -[n|s] LATITUDE -[e|w] LONGITUDE -z TIME_ZONE");
@@ -19,4 +18,12 @@ if (args.h) {
 }
 
 const timezone = moment.tz.guess();
-//console.log(timezone);
+
+let latitude;
+if (args.n) {
+	latitude = args.n
+} else if (args.s) {
+	latitude = -args.s
+}
+
+//const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude='
