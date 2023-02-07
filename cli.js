@@ -17,7 +17,10 @@ if (args.h) {
 	process.exit(0);
 }
 
-const timezone = moment.tz.guess();
+let timezone = moment.tz.guess();
+if (args.z) {
+	timezone = args.z
+}
 
 let latitude;
 if (args.n) {
@@ -26,4 +29,14 @@ if (args.n) {
 	latitude = -args.s
 }
 
-//const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude='
+let longitude;
+if (args.e) {
+	longitude = args.e
+} else if (args.w) {
+	longitude = -args.w
+}
+
+// Change fetch to grab variables
+const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&daily=precipitation_hours&current_weather=true&temperature_unit=fahrenheit&timezone=' + timezone)
+const data = await response.json();
+console.log(data);
